@@ -7,22 +7,25 @@ using namespace KamataEngine;
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int) {
 	
-	// エンジンの初期化
+	// エンジン初期化
 	KamataEngine::Initialize(L"LC1A_04_オダジマ_スズナ_");
 
-	// DirectXCommonインスタンスの取得
+	// DirectXCommonインスタンス取得
 	DirectXCommon* dxCommon = DirectXCommon::GetInstance();
 
-	// ゲームシーンのインスタンス生成
+	// ImGuiManagerインスタンス取得
+	ImGuiManager* imguiManager = ImGuiManager::GetInstance();
+
+	// ゲームシーンインスタンス生成
 	GameScene* gameScene = new GameScene();
 
-	// ゲームシーンの初期化.
+	// ゲームシーン初期化.
 	gameScene->Initialize();
 
 	// メインループ
 	while (true) {
 
-		// エンジンの更新
+		// エンジン更新
 		if (KamataEngine::Update()) {
 			break;
 		}
@@ -31,8 +34,14 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int) {
 		// 更新処理
 		// ===============================================
 		
-		// ゲームシーンの更新
+		// ImGui受付開始
+		imguiManager->Begin();
+
+		// ゲームシーン更新
 		gameScene->Update();
+
+		// imGui受付終了
+		imguiManager->End();
 
 		// ===============================================
 		// 描画処理
@@ -41,8 +50,14 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int) {
 		// 描画開始
 		dxCommon->PreDraw();
 
-		// ゲームシーンの描画
+		// ゲームシーン描画
 		gameScene->Draw();
+
+		// 軸表示描画
+		AxisIndicator::GetInstance()->Draw();
+
+		// ImGui描画
+		imguiManager->Draw();
 
 		// 描画終了
 		dxCommon->PostDraw();
