@@ -1,31 +1,23 @@
 #pragma once
 #include <KamataEngine.h>
+#include "Player.h"
 
 class GameScene {
 public:  /*public変数*/
 
 private: /*private変数*/
-
-	// 画像ハンドル
-	uint32_t grHandleSushi_ = 0;
-
-	// 音声ハンドル
-	uint32_t seHandleMokugyo = 0;
-
-	// スプライト
-	KamataEngine::Sprite* sprite_ = nullptr;
-
+	
 	// 3Dモデル
 	KamataEngine::Model* model_ = nullptr;
 
-	// ワールド行列
-	KamataEngine::WorldTransform worldTransform_;
+	// 画像ハンドル
+	uint32_t grHandlePlayer_ = 0u;
 
 	// カメラ
 	KamataEngine::Camera camera_;
 
-	// デバッグ用カメラ
-	KamataEngine::DebugCamera* debugCamera_ = nullptr;
+	// 自機
+	Player* player_ = nullptr;
 
 public:  /*public関数*/
 
