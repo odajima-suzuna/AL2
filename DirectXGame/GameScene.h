@@ -3,18 +3,7 @@
 
 class GameScene {
 public:  /*public変数*/
-
 private: /*private変数*/
-
-	// 画像ハンドル
-	uint32_t grHandleSushi_ = 0;
-
-	// 音声ハンドル
-	uint32_t seHandleMokugyo = 0;
-
-	// スプライト
-	KamataEngine::Sprite* sprite_ = nullptr;
-
 	// 3Dモデル
 	KamataEngine::Model* model_ = nullptr;
 
@@ -24,11 +13,15 @@ private: /*private変数*/
 	// カメラ
 	KamataEngine::Camera camera_;
 
+#ifdef _DEBUG
+
 	// デバッグ用カメラ
 	KamataEngine::DebugCamera* debugCamera_ = nullptr;
+	bool isDebugCameraActive_ = false;
 
-public:  /*public関数*/
+#endif // _DEBUG
 
+public: /*public関数*/
 	// コンストラクタ
 	GameScene();
 
@@ -45,5 +38,4 @@ public:  /*public関数*/
 	void Draw();
 
 private: /*private関数*/
-
 };

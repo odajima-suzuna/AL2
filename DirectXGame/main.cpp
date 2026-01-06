@@ -13,9 +13,6 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int) {
 	// DirectXCommonインスタンス取得
 	DirectXCommon* dxCommon = DirectXCommon::GetInstance();
 
-	// ImGuiManagerインスタンス取得
-	ImGuiManager* imguiManager = ImGuiManager::GetInstance();
-
 	// ゲームシーンインスタンス生成
 	GameScene* gameScene = new GameScene();
 
@@ -34,14 +31,8 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int) {
 		// 更新処理
 		// ===============================================
 		
-		// ImGui受付開始
-		imguiManager->Begin();
-
 		// ゲームシーン更新
 		gameScene->Update();
-
-		// imGui受付終了
-		imguiManager->End();
 
 		// ===============================================
 		// 描画処理
@@ -52,12 +43,6 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int) {
 
 		// ゲームシーン描画
 		gameScene->Draw();
-
-		// 軸表示描画
-		AxisIndicator::GetInstance()->Draw();
-
-		// ImGui描画
-		imguiManager->Draw();
 
 		// 描画終了
 		dxCommon->PostDraw();
