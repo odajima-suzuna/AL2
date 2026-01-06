@@ -7,37 +7,133 @@ GameScene::GameScene() {}
 
 GameScene::~GameScene() {
 
-	// 3Dモデルの解放
-	delete model_;
-
 #ifdef _DEBUG
 
 	// デバッグ用カメラの解放
 	delete debugCamera_;
+	debugCamera_ = nullptr;
 
 #endif // _DEBUG
+
+	// ブロック用ワールド行列の解放
+	for (std::vector<WorldTransform*>& worldTransformBlockLine : worldTransformBlocks_) {
+		for (WorldTransform* worldTransformBlock : worldTransformBlockLine) {
+			delete worldTransformBlock;
+		}
+	}
+	worldTransformBlocks_.clear();
+
+	// ブロック3Dモデルの解放
+	delete modelBlock_;
+	modelBlock_ = nullptr;
+
+	// 天球の解放
+	delete skydome;
+	skydome = nullptr;
+
+	// 天球3Dモデルの解放
+	delete modelSkydome_;
+	modelSkydome_ = nullptr;
+
+	// 自機の解放
+	delete player_;
+	player_ = nullptr;
+
+	// 自機3Dモデルの解放
+	delete modelPlayer_;
+	modelPlayer_ = nullptr;
 }
 
 void GameScene::Initialize() {
 
-	// 3Dモデル生成
-	model_ = Model::Create();
-
-	// ワールド行列初期化
-	worldTransform_.Initialize();
-
 	// カメラ初期化
+	camera_.farZ = 800.0f;
 	camera_.Initialize();
 
 #ifdef _DEBUG
 
 	// デバッグ用カメラ生成
 	debugCamera_ = new DebugCamera(1280, 720);
+	debugCamera_->SetFarZ(800.0f);
 
 #endif // _DEBUG
+
+	// 要素数
+	const uint32_t kNumBlockVirtical = 10;
+	const uint32_t kNumBlockHorizontal = 20;
+
+	// ブロック1個の横幅
+	const float kBlockWidth = 2.0f;
+	const float kBlockHeight = 2.0f;
+
+	// 配列の要素数を変更
+	// 列数を指定(縦)
+	worldTransformBlocks_.resize(kNumBlockVirtical);
+	for (uint32_t i = 0; i < kNumBlockVirtical; ++i) {
+		// 列ごとの要素数を指定(横)
+		worldTransformBlocks_[i].resize(kNumBlockHorizontal);
+	}
+
+	// ブロックの生成、初期化
+	for (uint32_t i = 0; i < kNumBlockVirtical; ++i) {
+		for (uint32_t j = 0; j < kNumBlockHorizontal; ++j) {
+			worldTransformBlocks_[i][j] = new KamataEngine::WorldTransform();
+			worldTransformBlocks_[i][j]->Initialize();
+			if (i % 2 == 0) {
+				worldTransformBlocks_[i][j]->translation_.x = kBlockWidth * j * 2+1.0f;
+				worldTransformBlocks_[i][j]->translation_.y = kBlockHeight * i;
+			} else {
+				worldTransformBlocks_[i][j]->translation_.x = kBlockWidth * j * 2;
+				worldTransformBlocks_[i][j]->translation_.y = kBlockHeight * i;
+			}
+		}
+	}
+
+	// ブロック3Dモデル生成
+	modelBlock_ = Model::CreateFromOBJ("block", true);
+
+	// 天球の生成
+	skydome = new Skydome();
+
+	// 天球の3Dモデル生成
+	modelSkydome_ = Model::CreateFromOBJ("skydome", true);
+
+	// 天球の初期化
+	skydome->Initialize(modelSkydome_, &camera_);
+
+	// 自機の生成
+	player_ = new Player();
+
+	// 自機の3Dモデル生成
+	modelPlayer_ = Model::CreateFromOBJ("player", true);
+
+	// 自機の初期化
+	player_->Initialize(modelPlayer_,&camera_);
 }
 
 void GameScene::Update() {
+
+	// ブロックの更新
+	for (std::vector<WorldTransform*>& worldTransformBlockLine : worldTransformBlocks_) {
+		for (WorldTransform* worldTransformBlock : worldTransformBlockLine) {
+			if (!worldTransformBlock) {
+				continue;
+			}
+
+			// アフィン変換行列の作成
+			Matrix4x4 affineMatrix = MakeAffineMatrix(worldTransformBlock->rotation_, worldTransformBlock->scale_, worldTransformBlock->translation_);
+
+			worldTransformBlock->matWorld_ = affineMatrix;
+
+			worldTransformBlock->TransferMatrix();
+		}
+	}
+
+	// 天球の更新
+	skydome->Update();
+
+	// 自機の更新
+	player_->Update();
 
 #ifdef _DEBUG
 
@@ -68,8 +164,22 @@ void GameScene::Draw() {
 	// 3Dモデル描画開始
 	Model::PreDraw();
 
-	// 3Dモデル描画
-	model_->Draw(worldTransform_, camera_);
+	// ブロックの描画
+	for (std::vector<WorldTransform*>& worldTransformBlockLine : worldTransformBlocks_) {
+		for (WorldTransform* worldTransformBlock : worldTransformBlockLine) {
+			if (!worldTransformBlock) {
+				continue;
+			}
+
+			modelBlock_->Draw(*worldTransformBlock, camera_);
+		}
+	}
+
+	// 自機の描画
+	player_->Draw();
+
+	// 天球の描画
+	skydome->Draw();
 
 	// 3Dモデル描画終了
 	Model::PostDraw();
