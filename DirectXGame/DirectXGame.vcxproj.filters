@@ -19,6 +19,15 @@
     <Filter Include="ソース ファイル\GameScene">
       <UniqueIdentifier>{3fc9659d-406d-4620-832b-81518c2c8340}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Skydome">
+      <UniqueIdentifier>{cc45ba08-1843-4855-81d0-4cc327f98269}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\MakeAffineMatrix">
+      <UniqueIdentifier>{b66c619a-b7eb-4d2a-bff9-9397a45559d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Player">
+      <UniqueIdentifier>{5e2f68f9-ff71-4b56-8737-bc7eb7256b75}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -26,6 +35,15 @@
     </ClCompile>
     <ClCompile Include="GameScene.cpp">
       <Filter>ソース ファイル\GameScene</Filter>
+    </ClCompile>
+    <ClCompile Include="Skydome.cpp">
+      <Filter>ソース ファイル\Skydome</Filter>
+    </ClCompile>
+    <ClCompile Include="MakeAffineMatrix.cpp">
+      <Filter>ソース ファイル\MakeAffineMatrix</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>ソース ファイル\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -80,6 +98,15 @@
   <ItemGroup>
     <ClInclude Include="GameScene.h">
       <Filter>ソース ファイル\GameScene</Filter>
+    </ClInclude>
+    <ClInclude Include="Skydome.h">
+      <Filter>ソース ファイル\Skydome</Filter>
+    </ClInclude>
+    <ClInclude Include="MakeAffineMatrix.h">
+      <Filter>ソース ファイル\MakeAffineMatrix</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>ソース ファイル\Player</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
