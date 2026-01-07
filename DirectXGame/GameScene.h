@@ -1,12 +1,12 @@
 #pragma once
-#include <KamataEngine.h>
-#include "Skydome.h"
+#include "MapChipField.h"
 #include "Player.h"
+#include "Skydome.h"
+#include <KamataEngine.h>
 
 class GameScene {
 public:  /*public変数*/
 private: /*private変数*/
-
 	// カメラ
 	KamataEngine::Camera camera_;
 
@@ -17,6 +17,9 @@ private: /*private変数*/
 	bool isDebugCameraActive_ = false;
 
 #endif // _DEBUG
+
+	//	マップチップフィールド
+	MapChipField* mapChipField_ = nullptr;
 
 	// ブロック用ワールド行列
 	std::vector<std::vector<KamataEngine::WorldTransform*>> worldTransformBlocks_;
@@ -53,4 +56,6 @@ public: /*public関数*/
 	void Draw();
 
 private: /*private関数*/
+	// ブロックの生成
+	void GenerateBlocks();
 };

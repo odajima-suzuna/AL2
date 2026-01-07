@@ -157,6 +157,7 @@
     <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MakeAffineMatrix.cpp" />
+    <ClCompile Include="MapChipField.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Skydome.cpp" />
   </ItemGroup>
@@ -260,6 +261,7 @@
   <ItemGroup>
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="MakeAffineMatrix.h" />
+    <ClInclude Include="MapChipField.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Skydome.h" />
   </ItemGroup>
