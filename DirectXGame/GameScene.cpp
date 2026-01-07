@@ -89,8 +89,11 @@ void GameScene::Initialize() {
 	// 自機の3Dモデル生成
 	modelPlayer_ = Model::CreateFromOBJ("player", true);
 
+	// 自機の座標をマップチップで指定
+	Vector3 playerPosition = mapChipField_->GetMapChipPositionByIndex(1, 18);
+
 	// 自機の初期化
-	player_->Initialize(modelPlayer_, &camera_);
+	player_->Initialize(modelPlayer_, &camera_,playerPosition);
 }
 
 void GameScene::Update() {

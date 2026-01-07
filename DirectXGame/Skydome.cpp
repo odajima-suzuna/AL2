@@ -1,5 +1,8 @@
 #include "Skydome.h"
 
+using namespace KamataEngine;
+
+
 Skydome::Skydome() {
 
 }
@@ -8,7 +11,7 @@ Skydome::~Skydome() {
 
 }
 
-void Skydome::Initialize(KamataEngine::Model* model, KamataEngine::Camera* camera) {
+void Skydome::Initialize(Model* model, Camera* camera) {
 	
 	// NULLチェック
 	assert(model);
