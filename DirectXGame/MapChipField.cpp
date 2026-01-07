@@ -1,6 +1,6 @@
 #include "MapChipField.h"
-#include "map"
 #include "fstream"
+#include "map"
 #include "sstream"
 
 namespace {

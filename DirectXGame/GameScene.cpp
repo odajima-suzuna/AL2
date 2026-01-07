@@ -90,7 +90,7 @@ void GameScene::Initialize() {
 	modelPlayer_ = Model::CreateFromOBJ("player", true);
 
 	// 自機の初期化
-	player_->Initialize(modelPlayer_,&camera_);
+	player_->Initialize(modelPlayer_, &camera_);
 }
 
 void GameScene::Update() {

@@ -19,7 +19,7 @@ private: /*private変数*/
 #endif // _DEBUG
 
 	//	マップチップフィールド
-	MapChipField* mapChipField_=nullptr;
+	MapChipField* mapChipField_ = nullptr;
 
 	// ブロック用ワールド行列
 	std::vector<std::vector<KamataEngine::WorldTransform*>> worldTransformBlocks_;
