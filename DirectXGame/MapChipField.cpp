@@ -12,9 +12,13 @@ std::map<std::string, MapChipType> mapChipTable = {
 
 }
 
-MapChipField::MapChipField() {}
+MapChipField::MapChipField() {
 
-MapChipField::~MapChipField() {}
+}
+
+MapChipField::~MapChipField() {
+
+}
 
 void MapChipField::ResetMapChipData() {
 	mapChipData_.data.clear();
@@ -24,7 +28,7 @@ void MapChipField::ResetMapChipData() {
 	}
 }
 
-void MapChipField::LoadMapChipCsv(const std::string& filePath) {
+void MapChipField::LoadMapChipCsv(const std::string& filePath) { 
 	// マップチップデータをリセット
 	ResetMapChipData();
 
@@ -51,7 +55,7 @@ void MapChipField::LoadMapChipCsv(const std::string& filePath) {
 		std::istringstream lineStream(line);
 
 		for (uint32_t j = 0; j < kNumBlockHorizontal; ++j) {
-
+			
 			std::string word;
 			std::getline(lineStream, word, ',');
 
@@ -62,7 +66,7 @@ void MapChipField::LoadMapChipCsv(const std::string& filePath) {
 	}
 }
 
-MapChipType MapChipField::GetMapChipTypeByIndex(uint32_t xIndex, uint32_t yIndex) {
+MapChipType MapChipField::GetMapChipTypeByIndex(uint32_t xIndex, uint32_t yIndex) { 
 	// 配列外の場合空白を返す
 	if (xIndex < 0 || kNumBlockHorizontal - 1 < xIndex) {
 		return MapChipType::kBlank;
@@ -74,6 +78,6 @@ MapChipType MapChipField::GetMapChipTypeByIndex(uint32_t xIndex, uint32_t yIndex
 	return mapChipData_.data[yIndex][xIndex];
 }
 
-KamataEngine::Vector3 MapChipField::GetMapChipPositionByIndex(uint32_t xIndex, uint32_t yIndex) {
+KamataEngine::Vector3 MapChipField::GetMapChipPositionByIndex(uint32_t xIndex, uint32_t yIndex) { 
 	return KamataEngine::Vector3(kBlockWidth * xIndex, kBlockHeight * (kNumBlockVirtical - 1 - yIndex), 0.0f);
 }

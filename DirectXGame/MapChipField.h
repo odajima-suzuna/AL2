@@ -11,7 +11,7 @@ struct MapChipData {
 };
 
 class MapChipField {
-public:  /*public変数*/
+public: /*public変数*/
 private: /*private変数*/
 	// 1ブロックのサイズ
 	static inline const float kBlockWidth = 1.0f;
@@ -57,7 +57,7 @@ public: /*public関数*/
 	/// 要素数を取得
 	/// </summary>
 	const uint32_t GetNumBlockVirtical() const { return kNumBlockVirtical; }
-
+	
 	/// <summary>
 	/// 要素数を取得
 	/// </summary>
