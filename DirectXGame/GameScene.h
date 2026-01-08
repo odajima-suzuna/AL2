@@ -2,6 +2,7 @@
 #include "MapChipField.h"
 #include "Player.h"
 #include "Skydome.h"
+#include "CameraController.h"
 #include <KamataEngine.h>
 
 class GameScene {
@@ -9,6 +10,9 @@ public:  /*public変数*/
 private: /*private変数*/
 	// カメラ
 	KamataEngine::Camera camera_;
+
+	//カメラコントローラー
+	CameraController* cameraController_ = nullptr;
 
 #ifdef _DEBUG
 
