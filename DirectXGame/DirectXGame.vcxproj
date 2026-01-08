@@ -154,7 +154,9 @@
     </FxCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CameraController.cpp" />
     <ClCompile Include="GameScene.cpp" />
+    <ClCompile Include="Lerp.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MakeAffineMatrix.cpp" />
     <ClCompile Include="MapChipField.cpp" />
@@ -259,7 +261,9 @@
     <None Include="Resources\shaders\Sprite.hlsli" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CameraController.h" />
     <ClInclude Include="GameScene.h" />
+    <ClInclude Include="Lerp.h" />
     <ClInclude Include="MakeAffineMatrix.h" />
     <ClInclude Include="MapChipField.h" />
     <ClInclude Include="Player.h" />

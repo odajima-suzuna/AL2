@@ -9,6 +9,10 @@ GameScene::~GameScene() {
 
 #ifdef _DEBUG
 
+	// カメラコントローラーの解放
+	delete cameraController_;
+	cameraController_ = nullptr;
+
 	// デバッグ用カメラの解放
 	delete debugCamera_;
 	debugCamera_ = nullptr;
@@ -94,6 +98,18 @@ void GameScene::Initialize() {
 
 	// 自機の初期化
 	player_->Initialize(modelPlayer_, &camera_,playerPosition);
+
+	// カメラコントローラーの生成
+	cameraController_ = new CameraController();
+
+	// カメラコントローラーの初期化
+	cameraController_->Initialize(&camera_);
+
+	// カメラの追従対象をセット
+	cameraController_->SetTarGet(player_);
+
+	// リセット(瞬間合わせ)
+	cameraController_->Reset();
 }
 
 void GameScene::Update() {
@@ -140,7 +156,13 @@ void GameScene::Update() {
 		camera_.UpdateMatrix();
 	}
 
+	// カメラコントローラーの更新処理
+	if (!isDebugCameraActive_) {
+		cameraController_->Update(player_->GetVelocity());
+	}
+
 #endif // DEBUG
+	
 }
 
 void GameScene::Draw() {
